@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from __future__ import print_function
 from datetime import datetime, timezone, timedelta
 import pickle
@@ -41,7 +43,6 @@ def main():
     four_weeks = timedelta(weeks=4)
     timeFrom = (today - one_week).isoformat()
     timeTo = (today + four_weeks).isoformat()
-    print('Getting the upcoming 10 events')
     events_result = service.events().list(calendarId='primary',
                                           timeMin=timeFrom,
                                           timeMax=timeTo,
@@ -49,8 +50,6 @@ def main():
                                           orderBy='startTime').execute()
     events = events_result.get('items', [])
 
-    if not events:
-        print('No upcoming events found.')
     for event in events:
         start = datetime.fromisoformat(event['start'].get('dateTime', event['start'].get('date')))
         end = datetime.fromisoformat(event['end'].get('dateTime', event['end'].get('date')))
