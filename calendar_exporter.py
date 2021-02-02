@@ -11,8 +11,9 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
 def main():
-    """Export Google Calendar to an .ics file.
-    Prints the start and name of the events for next 30 days from the user's calendar.
+    """Export Google Calendar to an .ics file.  Prints the start and name
+    of the events for next 30 days from the user's calendar.
+
     """
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
@@ -51,7 +52,6 @@ def main():
     for event in events:
         start = datetime.fromisoformat(event['start'].get('dateTime', event['start'].get('date')))
         end = datetime.fromisoformat(event['end'].get('dateTime', event['end'].get('date')))
-                
         print(f"{start.strftime('%m/%d/%Y')} {start.strftime('%H:%M')}-{end.strftime('%H:%M')} {event['summary']}")
 
 
